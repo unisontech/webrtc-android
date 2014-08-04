@@ -72,7 +72,7 @@ prerequisites
 build arm
 build x86
 
-git clone git@github.com:romansk/webrtc-repo.git mavenrepo
+git clone git@github.com:unisontech/webrtc-repo.git mavenrepo
 
 make
 
