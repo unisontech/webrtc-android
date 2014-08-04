@@ -34,7 +34,7 @@ build() {
     gclient runhooks --force || fail
     ninja -C out_$1/Debug libjingle_peerconnection_so libjingle_peerconnection.jar || fail
 	ninja -C out_$1/Release libjingle_peerconnection_so libjingle_peerconnection.jar || fail
-    $STRIP -s out_$1/Release/libjingle_peerconnection_so.so
+    $STRIP -s out_$1/Release/libjingle_peerconnection_so.so || fail
     pushd out_$1/Release || fail
     popd
     popd
@@ -46,10 +46,10 @@ prerequisites() {
     which gclient >/dev/null
     if [ $? -ne 0 ]; 
     then
-	   git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+	   git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git || fail
 	   export PATH=`pwd`/depot_tools:"$PATH"
     fi
-    gclient sync --nohooks
+    gclient sync --nohooks || fail
     pushd trunk
     source ./build/android/envsetup.sh
     popd
@@ -63,7 +63,7 @@ pushToGit() {
     pushd mavenrepo    
     git add repo/*
     git commit -m "webrtc revision: $REVISION"
-    git push origin master
+    git push origin master || fail
     popd
 }
 
