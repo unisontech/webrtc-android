@@ -29,8 +29,8 @@ set_environment_for_x86() {
 build() {
     echo "-- building webrtc/$1"
     pushd trunk || fail
-    ./setup_links.py --force || fail
     set_environment_for_$1 || fail
+    ./setup_links.py --force || fail
     gclient sync --force || fail
     gclient runhooks --force || fail
     ninja -C out_$1/Debug libjingle_peerconnection_so libjingle_peerconnection.jar || fail
