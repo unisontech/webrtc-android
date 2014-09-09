@@ -50,7 +50,7 @@ prerequisites() {
 	   git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git || fail
 	   export PATH=`pwd`/depot_tools:"$PATH"
     fi
-    gclient sync --nohooks || fail
+    gclient sync || fail
     pushd trunk
     source ./build/android/envsetup.sh
     popd
