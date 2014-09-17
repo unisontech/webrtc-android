@@ -28,7 +28,7 @@ set_environment_for_x86() {
 }
 
 sync_source() {
-    echo "-- building webrtc/$1"
+    echo "-- downloading sources webrtc/$1"
     trunk/setup_links.py --force || fail
     pushd trunk || fail
     set_environment_for_$1 || fail
@@ -55,8 +55,7 @@ prerequisites() {
 
 prerequisites
 
-sync_source arm
-sync_source x86
+sync_source
 
 
 
