@@ -13,27 +13,12 @@ set_environment() {
     export MACH=`uname -m`
 }
 
-set_environment_for_arm() {
-    set_environment
-    export GYP_DEFINES="$GYP_DEFINES OS=android"
-    export GYP_GENERATOR_FLAGS="$GYP_GENERATOR_FLAGS output_dir=out_arm"
-    export STRIP="$ANDROID_NDK/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-$MACH/arm-linux-androideabi/bin/strip"
-}
-
-set_environment_for_x86() {
-   set_environment
-   export GYP_DEFINES="$GYP_DEFINES OS=android target_arch=ia32"
-   export GYP_GENERATOR_FLAGS="$GYP_GENERATOR_FLAGS output_dir=out_x86"
-   export STRIP="$ANDROID_NDK/toolchains/x86-4.6/prebuilt/linux-$MACH/bin/i686-linux-android-strip"
-}
-
 sync_source() {
-    echo "-- downloading sources webrtc/$1"
-    trunk/setup_links.py --force || fail
+    echo "-- downloading sources webrtc"
     pushd trunk || fail
-    set_environment_for_$1 || fail
     gclient sync --force || fail
     gclient runhooks --force || fail
+    popd
 }
 
 prerequisites() {
@@ -51,11 +36,13 @@ prerequisites() {
     rm -rf mavenrepo
     rm -rf repo
     rm -rf webrtc_pom
+
+    trunk/setup_links.py --force || fail
 }
 
 prerequisites
 
-sync_source
+sync_source 
 
 
 
