@@ -31,6 +31,7 @@ build() {
     echo "-- building webrtc/$1"
     pushd trunk || fail
     set_environment_for_$1 || fail
+    gclient runhooks
     ninja -C out_$1/Debug libjingle_peerconnection_so libjingle_peerconnection.jar || fail
     ninja -C out_$1/Release libjingle_peerconnection_so libjingle_peerconnection.jar || fail
     $STRIP -s out_$1/Release/libjingle_peerconnection_so.so || fail
