@@ -1,6 +1,6 @@
 solutions = [
-  { "name"        : "trunk",
-    "url"         : "http://webrtc.googlecode.com/svn/trunk@7134",
+  { "name"        : "src",
+    "url"         : "http://webrtc.googlecode.com/svn/trunk@7524",
     "deps_file"   : "DEPS",
     "managed"     : True,
     "custom_deps" : {

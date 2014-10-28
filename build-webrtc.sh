@@ -29,8 +29,9 @@ set_environment_for_x86() {
 
 build() {
     echo "-- building webrtc/$1"
-    trunk/setup_links.py --force || fail
-    pushd trunk || fail
+	rm ./.gclient_entries
+    src/setup_links.py --force || fail
+    pushd src || fail
     set_environment_for_$1 || fail
     gclient sync --force || fail
     gclient runhooks --force || fail
@@ -52,7 +53,7 @@ prerequisites() {
 	   export PATH=`pwd`/depot_tools:"$PATH"
     fi
     gclient sync || fail
-    pushd trunk
+    pushd src 
     source ./build/android/envsetup.sh
     popd
     rm -rf mavenrepo
