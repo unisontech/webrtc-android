@@ -3,6 +3,7 @@ exec scala "$0" "$@"
 !#
 
 import java.io.File
+import scala.io.Source
 
 object DeployWebrtc {
   import scala.sys.process._
@@ -12,7 +13,12 @@ object DeployWebrtc {
   val repo:File = new File("repo")
 
 
-  lazy val stripWebrtcRevision = "grep" :: "-Po" :: "'(?<=@)[^\"]+'" :: ".gclient" :: Nil
+def stripWebrtcRevision:Seq[String] = for {
+    line <- Source.fromFile(".gclient").getLines().toSeq
+    if line.contains("svn/trunk")
+  } yield line.substring(line.lastIndexOf('@') + 1)
+
+
   lazy val extractDiff = "svn" :: "diff" :: "src/" :: Nil
 
   def exitWithError(status: Int, e: Throwable) = {
@@ -22,10 +28,12 @@ object DeployWebrtc {
 
 
   def main(args: Array[String]):Unit = try {
-    val webrtcVersion:String = args.applyOrElse(0, (_:Int) => stripWebrtcRevision.!!)
+    val webrtcVersion:String = args.applyOrElse(0, stripWebrtcRevision)
 
     val patchDeployResult = withTmpFileOfExt("patch")(patchFile => {
-      (extractDiff #> patchFile).run()
+      if ((extractDiff #> patchFile).! > 0) {
+        throw new IllegalStateException("Failed to extract diff")
+      }
       deployArtifact(patchFile, "libjingle_peerconnection_patch", "patch", webrtcVersion, None)
     })
 
