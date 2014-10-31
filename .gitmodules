@@ -1,0 +1,4 @@
+[submodule "repo"]
+	path = repo
+	url = git@github.com:unisontech/webrtc-android.git
+	branch = repo

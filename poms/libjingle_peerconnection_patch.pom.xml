@@ -4,7 +4,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.google.webrtc</groupId>
-    <artifactId>libjingle_peerconnection_so</artifactId>
+    <artifactId>libjingle_peerconnection_patch</artifactId>
     <packaging>patch</packaging>
     <version>1.0</version>
     <name>webrtc</name>
