@@ -3,10 +3,11 @@
   <groupId>com.google.webrtc</groupId>
   <artifactId>webrtc</artifactId>
   <versioning>
-    <release>7524</release>
+    <release>43c8839</release>
     <versions>
       <version>7524</version>
+      <version>43c8839</version>
     </versions>
-    <lastUpdated>20141205171100</lastUpdated>
+    <lastUpdated>20150130131234</lastUpdated>
   </versioning>
 </metadata>
