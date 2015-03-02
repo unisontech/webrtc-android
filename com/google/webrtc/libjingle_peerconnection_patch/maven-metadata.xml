@@ -3,12 +3,13 @@
   <groupId>com.google.webrtc</groupId>
   <artifactId>libjingle_peerconnection_patch</artifactId>
   <versioning>
-    <release>43c8839</release>
+    <release>11426dc</release>
     <versions>
       <version>7178</version>
       <version>7524</version>
       <version>43c8839</version>
+      <version>11426dc</version>
     </versions>
-    <lastUpdated>20150130133528</lastUpdated>
+    <lastUpdated>20150302113116</lastUpdated>
   </versioning>
 </metadata>
