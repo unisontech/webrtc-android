@@ -3,7 +3,7 @@
   <groupId>com.google.webrtc</groupId>
   <artifactId>libjingle_peerconnection</artifactId>
   <versioning>
-    <release>11426dc</release>
+    <release>11426dc719f24ece3246fd8fb24ae073c49b42ed</release>
     <versions>
       <version>1.0</version>
       <version>6764</version>
@@ -11,7 +11,8 @@
       <version>7524</version>
       <version>43c8839</version>
       <version>11426dc</version>
+      <version>11426dc719f24ece3246fd8fb24ae073c49b42ed</version>
     </versions>
-    <lastUpdated>20150302123430</lastUpdated>
+    <lastUpdated>20150302123856</lastUpdated>
   </versioning>
 </metadata>
