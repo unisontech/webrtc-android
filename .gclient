@@ -1,9 +1,8 @@
 solutions = [
-  { 
-    "name"        : "src",
-    "url"         : "https://chromium.googlesource.com/external/webrtc.git",
+  { "name"        : "src",
+    "url"         : "http://webrtc.googlecode.com/svn/trunk@7524",
     "deps_file"   : "DEPS",
-    "managed"     : False,
+    "managed"     : True,
     "custom_deps" : {
     },
     "safesync_url": "",

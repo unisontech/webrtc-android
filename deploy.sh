@@ -45,7 +45,7 @@ prerequisites() {
 }
 
 pushToGit() {
-    REVISION=`grep -Po '(?<==)[^\"]+' release-version`
+    REVISION=`grep -Po '(?<=@)[^\"]+' .gclient`
     pushd repo    
     git add --all
     git commit -m "webrtc revision: $REVISION"
@@ -53,7 +53,7 @@ pushToGit() {
     popd
 }
 
-#prerequisites
+prerequisites
 
 pushd repo
 git pull origin repo

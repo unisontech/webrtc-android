@@ -14,9 +14,9 @@ object DeployWebrtc {
 
 
 def stripWebrtcRevision:Seq[String] = for {
-    line <- Source.fromFile("release-version").getLines().toSeq
-    if line.contains("version=")
-  } yield line.substring(line.lastIndexOf('=') + 1)
+    line <- Source.fromFile(".gclient").getLines().toSeq
+    if line.contains("svn/trunk")
+  } yield line.substring(line.lastIndexOf('@') + 1)
 
 
   lazy val extractDiff = "svn" :: "diff" :: "src/" :: Nil
