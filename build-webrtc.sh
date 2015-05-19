@@ -68,8 +68,11 @@ pushToGit() {
     pushd repo    
     git add --all
     git commit -m "webrtc revision: $REVISION"
-    #git push origin master || fail
+    git push origin repo || fail
     popd
+    git add --all
+    git commit -m "webrtc revision: $REVISION"
+    git push origin master || fail
 }
 
 prerequisites
