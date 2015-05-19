@@ -14,9 +14,9 @@ object DeployWebrtc {
 
 
 def stripWebrtcRevision:Seq[String] = for {
-    line <- Source.fromFile(".gclient").getLines().toSeq
-    if line.contains("svn/trunk")
-  } yield line.substring(line.lastIndexOf('@') + 1)
+    line <- Source.fromFile("release-version").getLines().toSeq
+    if line.contains("version=")
+  } yield line.substring(line.lastIndexOf('=') + 1)
 
 
   lazy val extractDiff = "svn" :: "diff" :: "src/" :: Nil
@@ -30,22 +30,22 @@ def stripWebrtcRevision:Seq[String] = for {
   def main(args: Array[String]):Unit = try {
     val webrtcVersion:String = args.applyOrElse(0, stripWebrtcRevision)
 
-    val patchDeployResult = withTmpFileOfExt("patch")(patchFile => {
+    /*val patchDeployResult = withTmpFileOfExt("patch")(patchFile => {
       if ((extractDiff #> patchFile).! > 0) {
         throw new IllegalStateException("Failed to extract diff")
       }
       deployArtifact(patchFile, "libjingle_peerconnection_patch", "patch", webrtcVersion, None)
-    })
+    })*/
 
     val deployResults = for {
       (artifactPath, classifier) <- Seq(
         "src/out_arm/Release/libjingle_peerconnection.jar"   -> None,
-        "src/out_arm/Release/libjingle_peerconnection_so.so" -> Some("armeabi"),
-        "src/out_x86/Release/libjingle_peerconnection_so.so" -> Some("x86")
+        "src/out_arm/Release/AppRTCDemo/libs/armeabi-v7a/libjingle_peerconnection_so.so" -> Some("armeabi"),
+        "src/out_x86/Release/AppRTCDemo/libs/x86/libjingle_peerconnection_so.so" -> Some("x86")
       )
     } yield deployArtifact(new File(artifactPath), webrtcVersion, classifier)
 
-    val totalReturnCode = deployResults.reduce(_ + _) + patchDeployResult
+    val totalReturnCode = deployResults.reduce(_ + _) /*+ patchDeployResult*/
     if (totalReturnCode > 0) {
       throw new IllegalStateException("Some operation finished with error")
     }
@@ -58,7 +58,7 @@ def stripWebrtcRevision:Seq[String] = for {
 
   def deployArtifact(file:File, version: String, classifier:Option[String] = None):Int = {
     val fileName = file.getName
-    val ext = fileName.substring(fileName.lastIndexOf('.'))
+    val ext = fileName.substring(fileName.lastIndexOf('.') + 1)
     val baseName = fileName.substring(0, fileName.lastIndexOf('.'))
     deployArtifact(file, baseName, ext, version, classifier)
   }
