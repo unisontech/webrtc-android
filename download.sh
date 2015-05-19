@@ -37,7 +37,7 @@ prerequisites() {
     git checkout -b release_$RELEASE_VERSION refs/remotes/branch-heads/$RELEASE_VERSION
     source ./build/android/envsetup.sh
     popd
-
+    rm ./.gclient_entries
     src/setup_links.py --force || fail
 }
 
