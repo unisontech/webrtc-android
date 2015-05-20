@@ -4,9 +4,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.google.webrtc</groupId>
-    <artifactId>libjingle_peerconnection</artifactId>
+    <artifactId>webrtc</artifactId>
     <version>68898a265283de31f16e519c1218e716e61ba508</version>
     <name>webrtc</name>
+    <packaging>aar</packaging>
     <url>https://webrtc.org</url>
 
 </project>

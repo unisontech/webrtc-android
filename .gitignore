@@ -1,2 +1,8 @@
 src
 .gclient_entries
+aar-project/.gradle
+aar-project/build
+depot_tools
+repo
+aar-project/src/main/jniLibs/armeabi/libjingle_peerconnection_so.so
+aar-project/src/main/jniLibs/x86/libjingle_peerconnection_so.so

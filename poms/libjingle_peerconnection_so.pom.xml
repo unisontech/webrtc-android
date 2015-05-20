@@ -6,7 +6,7 @@
     <groupId>com.google.webrtc</groupId>
     <artifactId>libjingle_peerconnection_so</artifactId>
     <packaging>so</packaging>
-    <version>1.0</version>
+    <version>68898a265283de31f16e519c1218e716e61ba508</version>
     <name>webrtc</name>
     <url>https://webrtc.org</url>
 
