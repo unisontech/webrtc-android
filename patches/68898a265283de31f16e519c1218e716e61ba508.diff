@@ -1,0 +1,13 @@
+diff --git a/talk/media/webrtc/webrtcvoiceengine.cc b/talk/media/webrtc/webrtcvoiceengine.cc
+index 57405ca..6f4438a 100644
+--- a/talk/media/webrtc/webrtcvoiceengine.cc
++++ b/talk/media/webrtc/webrtcvoiceengine.cc
+@@ -647,7 +647,7 @@ bool WebRtcVoiceEngine::ApplyOptions(const AudioOptions& options_in) {
+   options.echo_cancellation.Set(false);
+   options.auto_gain_control.Set(false);
+ #elif defined(ANDROID)
+-  ec_mode = webrtc::kEcAecm;
++  ec_mode = webrtc::kEcAec;
+ #endif
+ 
+ #if defined(IOS) || defined(ANDROID)
