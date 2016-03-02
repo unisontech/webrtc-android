@@ -33,21 +33,29 @@ prerequisites() {
     git pull || fail
     if [ -d "depot_tools" ]; then
         echo "depot exists"
-    else 
+    else
         git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git || fail
     fi
     export PATH=`pwd`/depot_tools:"$PATH"
     if [ -d "src" ]; then
+        gclient sync || fail
         echo "src exists. Fetch updates"
-        pushd src || fail        
+        pushd src || fail
+        git stash save || fail
+        rm -r out_arm
+        rm -r out_x86
+        echo "patches stashed"
         git fetch || fail
+        echo "updates fetched"
         popd
-    else 
+    else
         echo "src not found. Fetch all sources"
         fetch webrtc_android || fail
-    fi    
+    fi
     pushd src || fail
     git checkout $1
+    git stash pop || fail
+    echo "patches unstashed"
     . build/android/envsetup.sh
     python webrtc/build/gyp_webrtc
     popd
@@ -58,8 +66,8 @@ build() {
     set_environment_for_$1
     pushd src || fail
     python webrtc/build/gyp_webrtc
-    ninja -C out_$1/Debug libjingle_peerconnection_so libjingle_peerconnection.jar || fail
-    ninja -C out_$1/Release libjingle_peerconnection_so libjingle_peerconnection.jar || fail
+    ninja -C out_$1/Debug libjingle_peerconnection_so libjingle_peerconnection_java || fail
+    ninja -C out_$1/Release libjingle_peerconnection_so libjingle_peerconnection_java || fail
     $STRIP -s out_$1/Release/lib/libjingle_peerconnection_so.so || fail
     pushd out_$1/Release || fail
     popd
@@ -70,7 +78,7 @@ build() {
 init_mvn_repo() {
     if [ -d "repo" ]; then
         echo "repo exists"
-    else 
+    else
         mkdir repo || fail
     fi
 }
@@ -79,25 +87,25 @@ cleanDiff() {
     if [ -f "patches/$1.diff" ]; then
         echo "previous diff for revision $1 found"
         rm -f patches/$1.diff
-    else 
+    else
         echo "no diff for revision $1 found."
-    fi 
+    fi
 }
 
 checkForPatch() {
     if [ -f "patches/$1.diff" ]; then
         echo "diff for revision $1 found"
-    else 
+    else
         echo "no diff for revision $1 found. Have you applied patches?"
         fail
-    fi 
+    fi
 }
 
 build_aar() {
     pushd aar-project || fail
     echo "arr build for rev: $1"
     ./gradlew -Prevision=$1 build
-    popd	
+    popd
 }
 
 

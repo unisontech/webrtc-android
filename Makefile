@@ -12,7 +12,7 @@ clean:
 mavenrepo:
 	@echo ${CURDIR}/repo
 	@mvn deploy:deploy-file -Dversion=${REVISION} -DpomFile=${POM_PATH}/libjingle_peerconnection_so.pom.xml -Dfile=src/out_arm/Release/lib/libjingle_peerconnection_so.so -Durl=file://${CURDIR}/repo -DcreateChecksum=true -Dclassifier=armeabi
-	@mvn deploy:deploy-file -Dversion=${REVISION} -DpomFile=${POM_PATH}/libjingle_peerconnection.pom.xml -Dfile=src/out_arm/Release/libjingle_peerconnection.jar -Durl=file://${CURDIR}/repo -DcreateChecksum=true
+	@mvn deploy:deploy-file -Dversion=${REVISION} -DpomFile=${POM_PATH}/libjingle_peerconnection.pom.xml -Dfile=src/out_arm/Release/lib.java/libjingle_peerconnection_java.jar -Durl=file://${CURDIR}/repo -DcreateChecksum=true
 	@mvn deploy:deploy-file -Dversion=${REVISION} -DpomFile=${POM_PATH}/libjingle_peerconnection_so.pom.xml -Dfile=src/out_x86/Release/lib/libjingle_peerconnection_so.so -Durl=file://${CURDIR}/repo -DcreateChecksum=true -Dclassifier=x86
 	@mvn deploy:deploy-file -Dversion=${REVISION} -DpomFile=${POM_PATH}/libjingle_peerconnection_patch.pom.xml -Dfile=patches/${REVISION}.diff -Durl=file://${CURDIR}/repo -D createChecksum=true
 

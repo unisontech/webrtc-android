@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.google.webrtc</groupId>
     <artifactId>webrtc</artifactId>
-    <version>68898a265283de31f16e519c1218e716e61ba508</version>
+    <version>544b4dc3d2f455ca9252efe9c0f84425ccb6fb41</version>
     <name>webrtc</name>
     <packaging>aar</packaging>
     <url>https://webrtc.org</url>
